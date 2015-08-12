@@ -1,0 +1,17 @@
+﻿@model Searcher.Models.Person
+
+@{
+   if (Model.Image != null)
+   {
+ 
+      WebImage wi = new WebImage(Model.Image);
+
+      wi.Resize(100, 100, true, true);
+
+      wi.Write();
+
+   }
+} 
+
+<h1>Hello</h1>
+

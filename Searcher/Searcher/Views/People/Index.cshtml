@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Searcher.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Person Directory</h2>
+
+<p>
+    @Html.ActionLink("Add Person", "Create")
+</p>
+
+<div class="Search">
+   @using (Html.BeginForm())
+   {
+      <p>
+         Last Name: @Html.TextBox("searchLast")  First Name: @Html.TextBox("searchFirst")<br /><br/>
+         <input type="submit" value="Search" style="float:right" />
+      </p>
+   }
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.interests)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+    </tr>
+@foreach (var item in Model) 
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.interests)
+        </td>
+        @if (@Html.ValueFor(modelItem => item.Image) != null)
+        {
+         <td>
+           <img alt="photo" src="@Url.Content("/People/MyImage?id="+ @Html.ValueFor(modelItem => item.ID))" />
+        </td>
+        }
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>        
+</tr>
+}
+
+</table>
